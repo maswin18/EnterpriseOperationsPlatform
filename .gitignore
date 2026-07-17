@@ -1,0 +1,21 @@
+# Build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+
+# VS Code
+.vscode/
+
+# User files
+*.user
+*.suo
+
+# Local database
+*.db
+*.db-shm
+*.db-wal
+
+# Local settings
+appsettings.*.local.json

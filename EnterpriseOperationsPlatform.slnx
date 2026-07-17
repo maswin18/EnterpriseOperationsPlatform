@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/EOP.Api/EOP.Api.csproj" />
+  </Folder>
+</Solution>
