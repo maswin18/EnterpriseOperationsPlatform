@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using EOP.Api.Models;
 
 namespace EOP.Api.Controllers;
 
@@ -11,7 +12,7 @@ public class EmployeeController : ControllerBase
     {
         var employees = new[]
         {
-            new
+            new Employee
             {
                 Id = 100001,
                 Name = "Maswin Putra",
