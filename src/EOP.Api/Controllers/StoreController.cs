@@ -10,7 +10,7 @@ public class StoreController : ControllerBase
     [HttpGet]
     public IActionResult GetStores()
     {
-        var stores = new[]
+        var stores = new List<Store>
         {
             new Store
             {
@@ -23,7 +23,21 @@ public class StoreController : ControllerBase
                 City = "Philadelphia",
                 Region = "PA",
                 Status = "Open",
-                UpdateAt = DateTime.Now
+                UpdatedAt = DateTime.Now
+            },
+
+            new Store
+            {
+                StoreId = 2,
+                StoreCode = "002",
+                StoreName = "Cherry Hill Mall",
+                SbsId = 2,
+                SbsName = "Mothercare",
+                Address = "Cherry Hill",
+                City = "Cherry Hill",
+                Region = "NJ",
+                Status = "Open",
+                UpdatedAt = DateTime.Now
             }
         };
 
