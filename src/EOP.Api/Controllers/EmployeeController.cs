@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using EOP.Api.Models;
+using Microsoft.EntityFrameworkCore;
+using EOP.Api.Data;
 
 namespace EOP.Api.Controllers;
 
@@ -7,28 +9,28 @@ namespace EOP.Api.Controllers;
 [Route("api/[controller]")]
 public class EmployeeController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult GetEmployees()
-    {
-        var employees = new List<Employee>
-        {
-            new Employee
-            {
-                Id = 100001,
-                Name = "Maswin Putra",
-                Department = "IT",
-                Position = "Software Developer"
-            },
+    private readonly ApplicationDbContext _context;
 
-            new Employee
-            {
-                Id = 100002,
-                Name = "John Smith",
-                Department = "Finance",
-                Position = "Manager"
-            }
-        };
+    public EmployeeController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetEmployees()
+    {
+        var employees = await _context.Employees.ToListAsync();
 
         return Ok(employees);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateEmployee(Employee employee)
+    {
+        _context.Employees.Add(employee);
+
+        await _context.SaveChangesAsync();
+
+        return Ok(employee);
     }
 }
