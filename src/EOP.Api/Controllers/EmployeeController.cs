@@ -31,11 +31,15 @@ public class EmployeeController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateEmployee(Employee employee)
     {
-        _context.Employees.Add(employee);
+        // _context.Employees.Add(employee);
 
-        await _context.SaveChangesAsync();
+        // await _context.SaveChangesAsync();
 
-        return Ok(employee);
+        // return Ok(employee);
+
+        var createdEmployee = await _employeeService.CreateEmployeeAsync(employee);
+
+        return Ok(createdEmployee);
     }
 
     [HttpGet("{id}")]
