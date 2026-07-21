@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using EOP.Api.Models;
-using EOP.Api.Data;
 using EOP.Api.Services;
-using Microsoft.EntityFrameworkCore;
 
 namespace EOP.Api.Controllers;
 
@@ -10,12 +8,10 @@ namespace EOP.Api.Controllers;
 [Route("api/[controller]")]
 public class EmployeeController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
     private readonly EmployeeService _employeeService;
 
-    public EmployeeController(ApplicationDbContext context, EmployeeService employeeService)
+    public EmployeeController(EmployeeService employeeService)
     {
-        _context = context;
         _employeeService = employeeService;
     }
 
@@ -69,16 +65,12 @@ public class EmployeeController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteEmployee(int id)
     {
-        var employee = await _context.Employees.FindAsync(id);
+        var deleted = await _employeeService.DeleteEmployeeAsync(id);
 
-        if (employee == null)
+        if (!deleted)
         {
             return NotFound();
         }
-
-        _context.Employees.Remove(employee);
-
-        await _context.SaveChangesAsync();
 
         return NoContent();
     }
