@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EOP.Api.Services;
 
-public class EmployeeService
+public class EmployeeService : IEmployeeService
 {
     private readonly ApplicationDbContext _context;
 
