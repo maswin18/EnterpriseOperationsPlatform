@@ -31,4 +31,22 @@ public class EmployeeService
 
         return employee;
     }
+
+    public async Task<Employee?> UpdateEmployeeAsync(int id, Employee updatedEmployee)
+    {
+        var employee = await _context.Employees.FindAsync(id);
+
+        if (employee == null)
+        {
+            return null;
+        }
+
+        employee.Name = updatedEmployee.Name;
+        employee.Department = updatedEmployee.Department;
+        employee.Position = updatedEmployee.Position;
+
+        await _context.SaveChangesAsync();
+
+        return employee;
+    }
 }
