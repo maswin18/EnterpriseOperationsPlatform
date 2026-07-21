@@ -41,7 +41,8 @@ public class EmployeeController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetEmployeeById(int id)
     {
-        var employee = await _context.Employees.FindAsync(id);
+        // var employee = await _context.Employees.FindAsync(id);
+        var employee = await _employeeService.GetEmployeeByIdAsync(id);
 
         if (employee == null)
         {

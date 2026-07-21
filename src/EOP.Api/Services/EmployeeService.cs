@@ -17,4 +17,9 @@ public class EmployeeService
     {
         return await _context.Employees.ToListAsync();
     }
+
+    public async Task<Employee?> GetEmployeeByIdAsync(int id)
+    {
+        return await _context.Employees.FindAsync(id);
+    }
 }
