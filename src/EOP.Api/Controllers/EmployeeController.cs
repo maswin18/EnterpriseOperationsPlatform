@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using EOP.Api.Models;
-using Microsoft.EntityFrameworkCore;
 using EOP.Api.Data;
+using EOP.Api.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace EOP.Api.Controllers;
 
@@ -10,16 +11,19 @@ namespace EOP.Api.Controllers;
 public class EmployeeController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly EmployeeService _employeeService;
 
-    public EmployeeController(ApplicationDbContext context)
+    public EmployeeController(ApplicationDbContext context, EmployeeService employeeService)
     {
         _context = context;
+        _employeeService = employeeService;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetEmployees()
     {
-        var employees = await _context.Employees.ToListAsync();
+        // var employees = await _context.Employees.ToListAsync();
+        var employees = await _employeeService.GetAllEmployeesAsync();
 
         return Ok(employees);
     }
