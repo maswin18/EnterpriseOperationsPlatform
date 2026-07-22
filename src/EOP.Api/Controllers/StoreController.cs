@@ -22,4 +22,12 @@ public class StoreController : ControllerBase
 
         return Ok(stores);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateStore(Store store)
+    {
+        var createdStore = await _storeService.CreateStoreAsync(store);
+
+        return Ok(createdStore);
+    }
 }

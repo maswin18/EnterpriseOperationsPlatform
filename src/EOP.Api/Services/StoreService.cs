@@ -17,4 +17,15 @@ public class StoreService : IStoreService
     {
         return await _context.Stores.ToListAsync();
     }
+
+    public async Task<Store> CreateStoreAsync(Store store)
+    {
+        store.UpdatedAt = DateTime.UtcNow;
+        
+        _context.Stores.Add(store);
+
+        await _context.SaveChangesAsync();
+
+        return store;
+    }
 }
